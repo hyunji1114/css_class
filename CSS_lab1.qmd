@@ -1,0 +1,165 @@
+---
+title: "intro_r_session"
+format: html
+editor: visual
+---
+
+# Title
+
+Smaller title
+
+Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+
+## Running Code
+
+When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+
+```{r}
+1 + 1
+```
+
+You can add options to executable code like this
+
+```{r}
+#| echo: false
+2 * 2
+```
+
+The `echo: false` option disables the printing of code (only output is displayed).
+
+```{r}
+print("this is a new code chunk")
+```
+
+```{r}
+3+3
+```
+
+```{r}
+print("Thank you for attending the intro to R session!")
+```
+
+## Objects in R
+
+Vectors: Ordered collection of same type
+
+Data frame
+
+ex) df \<- data.frame(vec1, vec2)
+
+```{r}
+number <- 7
+character_vec <- c("a", "b", "c", "test1")
+number
+c(1:1000)
+
+```
+
+# Exercise 1
+
+```{r}
+x <- 3
+y <-  4
+```
+
+```{r}
+z <- x * y
+```
+
+```{r}
+three_squared <- 3^2
+```
+
+```{r}
+three_squared > 10
+```
+
+```{r}
+x >! 10
+```
+
+!x \> 10 =\> 이렇게도 쓸 수 있음
+
+# Exercise 2
+
+```{r}
+vec1 <- c(100, 101, 102, 103, 104, 105)
+vec1 <- c(100:105)
+vec1 <- seq(100, 105, by = 1)
+```
+
+```{r}
+vec2 <- seq(0, 100, by = 2)
+```
+
+```{r}
+vec3 <- seq(100, 1, by = -1)
+x <- vec3
+```
+
+# Exercise 3
+
+```{r}
+vec1 <- rnorm (100, mean = 10, sd = 2)
+```
+
+```{r}
+vec1[c(1, 10, 100)]
+```
+
+```{r}
+mean(vec1)
+```
+
+```{r}
+sample_mean_100 <- mean(vec1)
+difference_100 <- abs(sample_mean_100 - 10)
+difference_100
+```
+
+```{r}
+vec2 <- rnorm (100000, mean = 10, sd = 2)
+mean(vec2)
+```
+
+```{r}
+sample_mean_100000 <- mean(vec2)
+difference_100000 <- abs(sample_mean_100000 - 10)
+difference_100000
+```
+
+```{r}
+diamonds <- ggplot2::diamonds
+library(tidyverse)
+```
+
+```{r}
+ggplot(data = diamonds) + 
+  geom_histogram(aes(x = carat), color = "black", fill = "pink") +
+  cowplot::theme_cowplot()
+```
+
+```{r}
+ggplot(data = diamonds) +
+  geom_point(aes(x = carat, y = price, color = cut)) +
+  cowplot::theme_cowplot()
+```
+
+# Exercise
+
+```{r}
+ggplot(data = diamonds) + 
+  geom_histogram(aes(x = price))
+```
+
+```{r}
+price_by_cut <- diamonds %>% 
+  dplyr::filter(carat >1) %>% 
+  group_by(cut) %>% 
+  summarize(mean_price = mean(price))
+
+price_by_cut %>% 
+  ggplot() +
+  geom_col(aes(x = cut, y = mean_price, color = cut, fill = cut))
+  
+```
